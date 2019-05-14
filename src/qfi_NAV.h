@@ -79,9 +79,11 @@ public:
 
     /** @param heading bug [deg] */
     void setHeadingBug( float headingBug );
+    void setHeadingBugVisible( bool visible );
 
     /** @param course [deg] */
     void setCourse( float course );
+    void setCourseVisible( bool visible );
 
     /** @param bearing [deg] */
     void setBearing( float bearing, bool visible = false );

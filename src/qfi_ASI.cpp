@@ -157,20 +157,20 @@ void qfi_ASI::init()
 
     reset();
 
-    m_itemFace = new QGraphicsSvgItem( ":/qfi/images/asi/asi_face.svg" );
+    m_itemFace = new QGraphicsSvgItem( ":/images/asi/asi_face.svg" );
     m_itemFace->setCacheMode( QGraphicsItem::NoCache );
     m_itemFace->setZValue( m_faceZ );
     m_itemFace->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_scene->addItem( m_itemFace );
 
-    m_itemHand = new QGraphicsSvgItem( ":/qfi/images/asi/asi_hand.svg" );
+    m_itemHand = new QGraphicsSvgItem( ":/images/asi/asi_hand.svg" );
     m_itemHand->setCacheMode( QGraphicsItem::NoCache );
     m_itemHand->setZValue( m_handZ );
     m_itemHand->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_itemHand->setTransformOriginPoint( m_originalAsiCtr );
     m_scene->addItem( m_itemHand );
 
-    m_itemCase = new QGraphicsSvgItem( ":/qfi/images/asi/asi_case.svg" );
+    m_itemCase = new QGraphicsSvgItem( ":/images/asi/asi_case.svg" );
     m_itemCase->setCacheMode( QGraphicsItem::NoCache );
     m_itemCase->setZValue( m_caseZ );
     m_itemCase->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );

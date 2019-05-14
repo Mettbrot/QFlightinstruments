@@ -156,6 +156,18 @@ public:
         m_alt->setAltitude( altitude );
     }
 
+    /** @param altitude (dimensionless numeric value) */
+    inline void setAltitudeBug( float altitudeBug )
+    {
+        m_alt->setAltitudeBug( altitudeBug );
+    }
+
+    /** @param altitude (dimensionless numeric value) */
+    inline void setAltitudeBugVisible( bool visible )
+    {
+        m_alt->setAltitudeBugVisible( visible );
+    }
+
     /**
      * @param pressure (dimensionless numeric value)
      * @param pressure unit according to GraphicsPFD::PressureUnit */
@@ -168,6 +180,18 @@ public:
     inline void setAirspeed( float airspeed )
     {
         m_asi->setAirspeed( airspeed );
+    }
+
+    /** @param airspeedBug (dimensionless numeric value) */
+    inline void setAirspeedBug( float airspeedBug )
+    {
+        m_asi->setAirspeedBug( airspeedBug );
+    }
+
+    /** @param visible (dimensionless numeric value) */
+    inline void setAirspeedBugVisible( bool visible )
+    {
+        m_asi->setAirspeedBugVisible( visible );
     }
 
     /** @param Mach number */
@@ -186,6 +210,18 @@ public:
     inline void setClimbRate( float climbRate )
     {
         m_vsi->setClimbRate( climbRate );
+    }
+
+    /** @param climb rate bug (dimensionless numeric value)  */
+    inline void setClimbRateBug( float climbRateBug )
+    {
+        m_vsi->setClimbRateBug( climbRateBug );
+    }
+
+    /** @param visible (dimensionless numeric value)  */
+    inline void setClimbRateBugVisible( bool visible )
+    {
+        m_vsi->setClimbRateBugVisible( visible );
     }
 
     /** @param ident (4-letter text) */
@@ -347,6 +383,8 @@ private:
         void init( float scaleX, float scaleY );
         void update( float scaleX, float scaleY );
         void setAltitude( float altitude );
+        void setAltitudeBug( float altitudeBug );
+        void setAltitudeBugVisible( bool visible );
         void setPressure( float pressure, int pressureUnit );
 
     private:
@@ -362,6 +400,7 @@ private:
         QGraphicsSvgItem  *m_itemGround;
         QGraphicsSvgItem  *m_itemFrame;
         QGraphicsTextItem *m_itemAltitude;
+        QGraphicsSvgItem  *m_itemAltitudeBug;
         QGraphicsTextItem *m_itemPressure;
 
         QColor m_frameTextColor;
@@ -372,6 +411,7 @@ private:
         QFont  m_labelsFont;
 
         float m_altitude;
+        float m_altitudeBug;
         float m_pressure;
 
         int m_pressureUnit;
@@ -401,6 +441,7 @@ private:
         QPointF m_originalGroundPos;
         QPointF m_originalFramePos;
         QPointF m_originalAltitudeCtr;
+        QPointF m_originalAltitudeBugPos;
         QPointF m_originalPressureCtr;
 
         const int m_backZ;
@@ -409,6 +450,7 @@ private:
         const int m_groundZ;
         const int m_frameZ;
         const int m_frameTextZ;
+        const int m_bugZ;
 
         void reset();
         void updateAltitude();
@@ -425,6 +467,8 @@ private:
         void init( float scaleX, float scaleY );
         void update( float scaleX, float scaleY );
         void setAirspeed( float airspeed );
+        void setAirspeedBug( float airspeedBug );
+        void setAirspeedBugVisible( bool visible );
         void setMachNo( float machNo );
 
     private:
@@ -444,6 +488,7 @@ private:
         QGraphicsSvgItem  *m_itemFrame;
         QGraphicsTextItem *m_itemAirspeed;
         QGraphicsTextItem *m_itemMachNo;
+        QGraphicsSvgItem *m_itemBug;
 
         QColor m_frameTextColor;
         QColor m_labelsColor;
@@ -452,6 +497,7 @@ private:
         QFont  m_labelsFont;
 
         float m_airspeed;
+        float m_airspeedBug;
         float m_machNo;
 
         float m_scale1DeltaY_new;
@@ -479,6 +525,7 @@ private:
         QPointF m_originalScale1Pos;
         QPointF m_originalScale2Pos;
         QPointF m_originalFramePos;
+        QPointF m_originalBugPos;
         QPointF m_originalAirspeedCtr;
         QPointF m_originalMachNoCtr;
 
@@ -486,6 +533,7 @@ private:
         const int m_scaleZ;
         const int m_labelsZ;
         const int m_frameZ;
+        const int m_bugZ;
         const int m_frameTextZ;
 
         void reset();
@@ -544,6 +592,8 @@ private:
         void init( float scaleX, float scaleY );
         void update( float scaleX, float scaleY );
         void setClimbRate( float climbRate );
+        void setClimbRateBug( float climbRateBug );
+        void setClimbRateBugVisible( bool visible );
 
     private:
 
@@ -551,11 +601,15 @@ private:
 
         QGraphicsSvgItem  *m_itemScale;
         QGraphicsSvgItem  *m_itemArrow;
+        QGraphicsSvgItem  *m_itemArrowBug;
 
         float m_climbRate;
+        float m_climbRateBug;
 
         float m_arrowDeltaY_new;
         float m_arrowDeltaY_old;
+        float m_arrowBugDeltaY_new;
+        float m_arrowBugDeltaY_old;
 
         float m_scaleX;
         float m_scaleY;
@@ -567,9 +621,11 @@ private:
 
         QPointF m_originalScalePos;
         QPointF m_originalArrowPos;
+        QPointF m_originalBugPos;
 
         const int m_scaleZ;
         const int m_arrowZ;
+        const int m_bugZ;
 
         void reset();
         void updateVSI();

@@ -152,14 +152,14 @@ void qfi_HSI::init()
 
     reset();
 
-    m_itemFace = new QGraphicsSvgItem( ":/qfi/images/hsi/hsi_face.svg" );
+    m_itemFace = new QGraphicsSvgItem( ":/images/hsi/hsi_face.svg" );
     m_itemFace->setCacheMode( QGraphicsItem::NoCache );
     m_itemFace->setZValue( m_faceZ );
     m_itemFace->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_itemFace->setTransformOriginPoint( m_originalHsiCtr );
     m_scene->addItem( m_itemFace );
 
-    m_itemCase = new QGraphicsSvgItem( ":/qfi/images/hsi/hsi_case.svg" );
+    m_itemCase = new QGraphicsSvgItem( ":/images/hsi/hsi_case.svg" );
     m_itemCase->setCacheMode( QGraphicsItem::NoCache );
     m_itemCase->setZValue( m_caseZ );
     m_itemCase->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
