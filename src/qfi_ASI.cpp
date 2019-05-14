@@ -51,10 +51,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifdef WIN32
-#   include <float.h>
-#endif
-
 #include <math.h>
 
 #include "qfi_ASI.h"
@@ -70,15 +66,15 @@ qfi_ASI::qfi_ASI( QWidget *parent ) :
     m_itemHand ( 0 ),
     m_itemCase ( 0 ),
 
-    m_airspeed ( 0.0f ),
+    m_airspeed ( 0.0 ),
 
-    m_scaleX ( 1.0f ),
-    m_scaleY ( 1.0f ),
+    m_scaleX ( 1.0 ),
+    m_scaleY ( 1.0 ),
 
     m_originalHeight ( 240 ),
     m_originalWidth  ( 240 ),
 
-    m_originalAsiCtr ( 120.0f , 120.0f ),
+    m_originalAsiCtr ( 120.0 , 120.0 ),
 
     m_faceZ ( -20 ),
     m_handZ ( -10 ),
@@ -129,12 +125,12 @@ void qfi_ASI::update()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void qfi_ASI::setAirspeed( float airspeed )
+void qfi_ASI::setAirspeed( double airspeed )
 {
     m_airspeed = airspeed;
 
-    if ( m_airspeed <   0.0f ) m_airspeed =   0.0f;
-    if ( m_airspeed > 235.0f ) m_airspeed = 235.0f;
+    if ( m_airspeed <   0.0 ) m_airspeed =   0.0;
+    if ( m_airspeed > 235.0 ) m_airspeed = 235.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -152,31 +148,31 @@ void qfi_ASI::resizeEvent( QResizeEvent *event )
 
 void qfi_ASI::init()
 {
-    m_scaleX = (float)width()  / (float)m_originalWidth;
-    m_scaleY = (float)height() / (float)m_originalHeight;
+    m_scaleX = static_cast<double>(width())  / static_cast<double>(m_originalWidth);
+    m_scaleY = static_cast<double>(height()) / static_cast<double>(m_originalHeight);
 
     reset();
 
-    m_itemFace = new QGraphicsSvgItem( ":/qfi/images/asi/asi_face.svg" );
+    m_itemFace = new QGraphicsSvgItem( ":/images/asi/asi_face.svg" );
     m_itemFace->setCacheMode( QGraphicsItem::NoCache );
     m_itemFace->setZValue( m_faceZ );
     m_itemFace->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_scene->addItem( m_itemFace );
 
-    m_itemHand = new QGraphicsSvgItem( ":/qfi/images/asi/asi_hand.svg" );
+    m_itemHand = new QGraphicsSvgItem( ":/images/asi/asi_hand.svg" );
     m_itemHand->setCacheMode( QGraphicsItem::NoCache );
     m_itemHand->setZValue( m_handZ );
     m_itemHand->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_itemHand->setTransformOriginPoint( m_originalAsiCtr );
     m_scene->addItem( m_itemHand );
 
-    m_itemCase = new QGraphicsSvgItem( ":/qfi/images/asi/asi_case.svg" );
+    m_itemCase = new QGraphicsSvgItem( ":/images/asi/asi_case.svg" );
     m_itemCase->setCacheMode( QGraphicsItem::NoCache );
     m_itemCase->setZValue( m_caseZ );
     m_itemCase->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_scene->addItem( m_itemCase );
 
-    centerOn( width() / 2.0f , height() / 2.0f );
+    centerOn( width() / 2.0 , height() / 2.0 );
 
     updateView();
 }
@@ -189,34 +185,34 @@ void qfi_ASI::reset()
     m_itemHand = 0;
     m_itemCase = 0;
 
-    m_airspeed = 0.0f;
+    m_airspeed = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void qfi_ASI::updateView()
 {
-    float angle = 0.0f;
+    double angle = 0.0;
 
-    if ( m_airspeed < 40.0f )
+    if ( m_airspeed < 40.0 )
     {
-        angle = 0.9f * m_airspeed;
+        angle = 0.9 * m_airspeed;
     }
-    else if ( m_airspeed < 70.0f )
+    else if ( m_airspeed < 70.0 )
     {
-        angle = 36.0f + 1.8f * ( m_airspeed - 40.0f );
+        angle = 36.0 + 1.8 * ( m_airspeed - 40.0 );
     }
-    else if ( m_airspeed < 130.0f )
+    else if ( m_airspeed < 130.0 )
     {
-        angle = 90.0f + 2.0f * ( m_airspeed - 70.0f );
+        angle = 90.0 + 2.0 * ( m_airspeed - 70.0 );
     }
-    else if ( m_airspeed < 160.0f )
+    else if ( m_airspeed < 160.0 )
     {
-        angle = 210.0f + 1.8f * ( m_airspeed - 130.0f );
+        angle = 210.0 + 1.8 * ( m_airspeed - 130.0 );
     }
     else
     {
-        angle = 264.0f + 1.2f * ( m_airspeed - 160.0f );
+        angle = 264.0 + 1.2 * ( m_airspeed - 160.0 );
     }
 
     m_itemHand->setRotation( angle );

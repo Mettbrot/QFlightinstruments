@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/qfi/">
+    <qresource prefix="">
         <file>images/adi/adi_back.svg</file>
         <file>images/adi/adi_case.svg</file>
         <file>images/adi/adi_face.svg</file>
@@ -49,14 +49,17 @@
         <file>images/pfd/pfd_alt_frame.svg</file>
         <file>images/pfd/pfd_alt_ground.svg</file>
         <file>images/pfd/pfd_alt_scale.svg</file>
+        <file>images/pfd/pfd_alt_bug.svg</file>
         <file>images/pfd/pfd_asi_back.svg</file>
         <file>images/pfd/pfd_asi_frame.svg</file>
         <file>images/pfd/pfd_asi_scale.svg</file>
+        <file>images/pfd/pfd_asi_bug.svg</file>
         <file>images/pfd/pfd_hsi_back.svg</file>
         <file>images/pfd/pfd_hsi_face.svg</file>
         <file>images/pfd/pfd_hsi_marks.svg</file>
         <file>images/pfd/pfd_vsi_arrow.svg</file>
         <file>images/pfd/pfd_vsi_scale.svg</file>
+        <file>images/pfd/pfd_vsi_bug.svg</file>
 		
 		<file>images/tc/tc_case.svg</file>
         <file>images/tc/tc_back.svg</file>

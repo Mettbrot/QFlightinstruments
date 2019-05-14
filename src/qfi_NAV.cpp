@@ -53,9 +53,6 @@
 
 #include <iostream>
 
-#ifdef WIN32
-#   include <float.h>
-#endif
 
 #include <math.h>
 #include <stdio.h>
@@ -88,32 +85,32 @@ qfi_NAV::qfi_NAV( QWidget *parent ) :
     m_hdgTextColor ( 255,   0, 255 ),
     m_dmeTextColor ( 255, 255, 255 ),
 
-    m_heading    ( 0.0f ),
-    m_headingBug ( 0.0f ),
-    m_course     ( 0.0f ),
-    m_bearing    ( 0.0f ),
-    m_deviation  ( 0.0f ),
-    m_distance   ( 0.0f ),
+    m_heading    ( 0.0 ),
+    m_headingBug ( 0.0 ),
+    m_course     ( 0.0 ),
+    m_bearing    ( 0.0 ),
+    m_deviation  ( 0.0 ),
+    m_distance   ( 0.0 ),
 
     m_bearingVisible   ( true ),
     m_deviationVisible ( true ),
     m_distanceVisible  ( true ),
 
-    m_devBarDeltaX_new ( 0.0f ),
-    m_devBarDeltaX_old ( 0.0f ),
-    m_devBarDeltaY_new ( 0.0f ),
-    m_devBarDeltaY_old ( 0.0f ),
+    m_devBarDeltaX_new ( 0.0 ),
+    m_devBarDeltaX_old ( 0.0 ),
+    m_devBarDeltaY_new ( 0.0 ),
+    m_devBarDeltaY_old ( 0.0 ),
 
-    m_scaleX ( 1.0f ),
-    m_scaleY ( 1.0f ),
+    m_scaleX ( 1.0 ),
+    m_scaleY ( 1.0 ),
 
-    m_originalPixPerDev ( 52.5f ),
+    m_originalPixPerDev ( 52.5 ),
 
-    m_originalNavCtr ( 150.0f, 150.0f ),
+    m_originalNavCtr ( 150.0, 150.0 ),
 
-    m_originalCrsTextCtr (  50.0f,  25.0f ),
-    m_originalHdgTextCtr ( 250.0f,  25.0f ),
-    m_originalDmeTextCtr ( 250.0f, 275.0f ),
+    m_originalCrsTextCtr (  50.0,  25.0 ),
+    m_originalHdgTextCtr ( 250.0,  25.0 ),
+    m_originalDmeTextCtr ( 250.0, 275.0 ),
 
     m_originalHeight ( 300 ),
     m_originalWidth  ( 300 ),
@@ -134,32 +131,32 @@ qfi_NAV::qfi_NAV( QWidget *parent ) :
 {
 #   ifdef WIN32
     m_crsTextFont.setFamily( "Courier" );
-    m_crsTextFont.setPointSizeF( 12.0f );
+    m_crsTextFont.setPointSizeF( 12.0 );
     m_crsTextFont.setStretch( QFont::Condensed );
     m_crsTextFont.setWeight( QFont::Bold );
 
     m_hdgTextFont.setFamily( "Courier" );
-    m_hdgTextFont.setPointSizeF( 12.0f );
+    m_hdgTextFont.setPointSizeF( 12.0 );
     m_hdgTextFont.setStretch( QFont::Condensed );
     m_hdgTextFont.setWeight( QFont::Bold );
 
     m_dmeTextFont.setFamily( "Courier" );
-    m_dmeTextFont.setPointSizeF( 10.0f );
+    m_dmeTextFont.setPointSizeF( 10.0 );
     m_dmeTextFont.setStretch( QFont::Condensed );
     m_dmeTextFont.setWeight( QFont::Bold );
 #   else
     m_crsTextFont.setFamily( "courier" );
-    m_crsTextFont.setPointSizeF( 12.0f );
+    m_crsTextFont.setPointSizeF( 12.0 );
     m_crsTextFont.setStretch( QFont::Condensed );
     m_crsTextFont.setWeight( QFont::Bold );
 
     m_hdgTextFont.setFamily( "courier" );
-    m_hdgTextFont.setPointSizeF( 12.0f );
+    m_hdgTextFont.setPointSizeF( 12.0 );
     m_hdgTextFont.setStretch( QFont::Condensed );
     m_hdgTextFont.setWeight( QFont::Bold );
 
     m_dmeTextFont.setFamily( "courier" );
-    m_dmeTextFont.setPointSizeF( 10.0f );
+    m_dmeTextFont.setPointSizeF( 10.0 );
     m_dmeTextFont.setStretch( QFont::Condensed );
     m_dmeTextFont.setWeight( QFont::Bold );
 #   endif
@@ -212,59 +209,76 @@ void qfi_NAV::update()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void qfi_NAV::setHeading( float heading )
+void qfi_NAV::setHeading( double heading )
 {
     m_heading = heading;
 
-    while ( m_heading <   0.0f ) m_heading += 360.0f;
-    while ( m_heading > 360.0f ) m_heading -= 360.0f;
+    while ( m_heading <   0.0 ) m_heading += 360.0;
+    while ( m_heading > 360.0 ) m_heading -= 360.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void qfi_NAV::setHeadingBug( float headingBug )
+void qfi_NAV::setHeadingBug( double headingBug )
 {
     m_headingBug = headingBug;
 
-    while ( m_headingBug <   0.0f ) m_headingBug += 360.0f;
-    while ( m_headingBug > 360.0f ) m_headingBug -= 360.0f;
+    while ( m_headingBug <   0.0 ) m_headingBug += 360.0;
+    while ( m_headingBug > 360.0 ) m_headingBug -= 360.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void qfi_NAV::setCourse( float course )
+void qfi_NAV::setHeadingBugVisible( bool visible )
+{
+    m_itemHdgBug->setVisible(visible);
+    m_itemHdgText->setVisible(visible);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void qfi_NAV::setCourse( double course )
 {
     m_course = course;
 
-    while ( m_course <   0.0f ) m_course += 360.0f;
-    while ( m_course > 360.0f ) m_course -= 360.0f;
+    while ( m_course <   0.0 ) m_course += 360.0;
+    while ( m_course > 360.0 ) m_course -= 360.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void qfi_NAV::setBearing( float bearing, bool visible )
+void qfi_NAV::setCourseVisible( bool visible )
+{
+    m_itemCrsText->setVisible(visible);
+    m_itemCrsArrow->setVisible(visible);
+    m_itemDevBar->setVisible(visible);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void qfi_NAV::setBearing( double bearing, bool visible )
 {
     m_bearing        = bearing;
     m_bearingVisible = visible;
 
-    while ( m_bearing <   0.0f ) m_bearing += 360.0f;
-    while ( m_bearing > 360.0f ) m_bearing -= 360.0f;
+    while ( m_bearing <   0.0 ) m_bearing += 360.0;
+    while ( m_bearing > 360.0 ) m_bearing -= 360.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void qfi_NAV::setDeviation( float deviation, bool visible )
+void qfi_NAV::setDeviation( double deviation, bool visible )
 {
     m_deviation        = deviation;
     m_deviationVisible = visible;
 
-    if ( m_deviation < -1.0f ) m_deviation = -1.0f;
-    if ( m_deviation >  1.0f ) m_deviation =  1.0f;
+    if ( m_deviation < -1.0 ) m_deviation = -1.0;
+    if ( m_deviation >  1.0 ) m_deviation =  1.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void qfi_NAV::setDistance( float distance, bool visible )
+void qfi_NAV::setDistance( double distance, bool visible )
 {
     m_distance        = fabs( distance );
     m_distanceVisible = visible;
@@ -285,63 +299,66 @@ void qfi_NAV::resizeEvent( QResizeEvent *event )
 
 void qfi_NAV::init()
 {
-    m_scaleX = (float)width()  / (float)m_originalWidth;
-    m_scaleY = (float)height() / (float)m_originalHeight;
+    m_scaleX = static_cast<double>(width())  / static_cast<double>(m_originalWidth);
+    m_scaleY = static_cast<double>(height()) / static_cast<double>(m_originalHeight);
 
-    m_itemBack = new QGraphicsSvgItem( ":/qfi/images/nav/nav_back.svg" );
+    m_itemBack = new QGraphicsSvgItem( ":/images/nav/nav_back.svg" );
     m_itemBack->setCacheMode( QGraphicsItem::NoCache );
     m_itemBack->setZValue( m_backZ );
     m_itemBack->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_scene->addItem( m_itemBack );
 
-    m_itemMask = new QGraphicsSvgItem( ":/qfi/images/nav/nav_mask.svg" );
+    m_itemMask = new QGraphicsSvgItem( ":/images/nav/nav_mask.svg" );
     m_itemMask->setCacheMode( QGraphicsItem::NoCache );
     m_itemMask->setZValue( m_maskZ );
     m_itemMask->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_scene->addItem( m_itemMask );
 
-    m_itemMark = new QGraphicsSvgItem( ":/qfi/images/nav/nav_mark.svg" );
+    m_itemMark = new QGraphicsSvgItem( ":/images/nav/nav_mark.svg" );
     m_itemMark->setCacheMode( QGraphicsItem::NoCache );
     m_itemMark->setZValue( m_markZ );
     m_itemMark->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_scene->addItem( m_itemMark );
 
-    m_itemBrgArrow = new QGraphicsSvgItem( ":/qfi/images/nav/nav_brg_arrow.svg" );
+    m_itemBrgArrow = new QGraphicsSvgItem( ":/images/nav/nav_brg_arrow.svg" );
     m_itemBrgArrow->setCacheMode( QGraphicsItem::NoCache );
     m_itemBrgArrow->setZValue( m_brgArrowZ );
     m_itemBrgArrow->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_itemBrgArrow->setTransformOriginPoint( m_originalNavCtr );
     m_scene->addItem( m_itemBrgArrow );
 
-    m_itemCrsArrow = new QGraphicsSvgItem( ":/qfi/images/nav/nav_crs_arrow.svg" );
+    m_itemCrsArrow = new QGraphicsSvgItem( ":/images/nav/nav_crs_arrow.svg" );
+    m_itemCrsArrow->setVisible(false);
     m_itemCrsArrow->setCacheMode( QGraphicsItem::NoCache );
     m_itemCrsArrow->setZValue( m_crsArrowZ );
     m_itemCrsArrow->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_itemCrsArrow->setTransformOriginPoint( m_originalNavCtr );
     m_scene->addItem( m_itemCrsArrow );
 
-    m_itemDevBar = new QGraphicsSvgItem( ":/qfi/images/nav/nav_dev_bar.svg" );
+    m_itemDevBar = new QGraphicsSvgItem( ":/images/nav/nav_dev_bar.svg" );
+    m_itemDevBar->setVisible(false);
     m_itemDevBar->setCacheMode( QGraphicsItem::NoCache );
     m_itemDevBar->setZValue( m_devBarZ );
     m_itemDevBar->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_itemDevBar->setTransformOriginPoint( m_originalNavCtr );
     m_scene->addItem( m_itemDevBar );
 
-    m_itemDevScale = new QGraphicsSvgItem( ":/qfi/images/nav/nav_dev_scale.svg" );
+    m_itemDevScale = new QGraphicsSvgItem( ":/images/nav/nav_dev_scale.svg" );
     m_itemDevScale->setCacheMode( QGraphicsItem::NoCache );
     m_itemDevScale->setZValue( m_devScaleZ );
     m_itemDevScale->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_itemDevScale->setTransformOriginPoint( m_originalNavCtr );
     m_scene->addItem( m_itemDevScale );
 
-    m_itemHdgBug = new QGraphicsSvgItem( ":/qfi/images/nav/nav_hdg_bug.svg" );
+    m_itemHdgBug = new QGraphicsSvgItem( ":/images/nav/nav_hdg_bug.svg" );
+    m_itemHdgBug->setVisible(false);
     m_itemHdgBug->setCacheMode( QGraphicsItem::NoCache );
     m_itemHdgBug->setZValue( m_hdgBugZ );
     m_itemHdgBug->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
     m_itemHdgBug->setTransformOriginPoint( m_originalNavCtr );
     m_scene->addItem( m_itemHdgBug );
 
-    m_itemHdgScale = new QGraphicsSvgItem( ":/qfi/images/nav/nav_hdg_scale.svg" );
+    m_itemHdgScale = new QGraphicsSvgItem( ":/images/nav/nav_hdg_scale.svg" );
     m_itemHdgScale->setCacheMode( QGraphicsItem::NoCache );
     m_itemHdgScale->setZValue( m_hdgScaleZ );
     m_itemHdgScale->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
@@ -351,23 +368,25 @@ void qfi_NAV::init()
     m_itemCrsText = 0;
 
     m_itemCrsText = new QGraphicsTextItem( QString( "CRS 999" ) );
+    m_itemCrsText->setVisible(false);
     m_itemCrsText->setCacheMode( QGraphicsItem::NoCache );
     m_itemCrsText->setZValue( m_crsTextZ );
     m_itemCrsText->setDefaultTextColor( m_crsTextColor );
     m_itemCrsText->setFont( m_crsTextFont );
     m_itemCrsText->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
-    m_itemCrsText->moveBy( m_scaleX * ( m_originalCrsTextCtr.x() - m_itemCrsText->boundingRect().width()  / 2.0f ),
-                           m_scaleY * ( m_originalCrsTextCtr.y() - m_itemCrsText->boundingRect().height() / 2.0f ) );
+    m_itemCrsText->moveBy( m_scaleX * ( m_originalCrsTextCtr.x() - m_itemCrsText->boundingRect().width()  / 2.0 ),
+                           m_scaleY * ( m_originalCrsTextCtr.y() - m_itemCrsText->boundingRect().height() / 2.0 ) );
     m_scene->addItem( m_itemCrsText );
 
     m_itemHdgText = new QGraphicsTextItem( QString( "HDG 999" ) );
+    m_itemHdgText->setVisible(false);
     m_itemHdgText->setCacheMode( QGraphicsItem::NoCache );
     m_itemHdgText->setZValue( m_hdgTextZ );
     m_itemHdgText->setDefaultTextColor( m_hdgTextColor );
     m_itemHdgText->setFont( m_hdgTextFont );
     m_itemHdgText->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
-    m_itemHdgText->moveBy( m_scaleX * ( m_originalHdgTextCtr.x() - m_itemHdgText->boundingRect().width()  / 2.0f ),
-                           m_scaleY * ( m_originalHdgTextCtr.y() - m_itemHdgText->boundingRect().height() / 2.0f ) );
+    m_itemHdgText->moveBy( m_scaleX * ( m_originalHdgTextCtr.x() - m_itemHdgText->boundingRect().width()  / 2.0 ),
+                           m_scaleY * ( m_originalHdgTextCtr.y() - m_itemHdgText->boundingRect().height() / 2.0 ) );
     m_scene->addItem( m_itemHdgText );
 
     m_itemDmeText = new QGraphicsTextItem( QString( "99.9 NM" ) );
@@ -376,8 +395,8 @@ void qfi_NAV::init()
     m_itemDmeText->setDefaultTextColor( m_dmeTextColor );
     m_itemDmeText->setFont( m_dmeTextFont );
     m_itemDmeText->setTransform( QTransform::fromScale( m_scaleX, m_scaleY ), true );
-    m_itemDmeText->moveBy( m_scaleX * ( m_originalDmeTextCtr.x() - m_itemDmeText->boundingRect().width()  / 2.0f ),
-                           m_scaleY * ( m_originalDmeTextCtr.y() - m_itemDmeText->boundingRect().height() / 2.0f ) );
+    m_itemDmeText->moveBy( m_scaleX * ( m_originalDmeTextCtr.x() - m_itemDmeText->boundingRect().width()  / 2.0 ),
+                           m_scaleY * ( m_originalDmeTextCtr.y() - m_itemDmeText->boundingRect().height() / 2.0 ) );
     m_scene->addItem( m_itemDmeText );
 
     updateView();
@@ -398,29 +417,29 @@ void qfi_NAV::reset()
     m_itemHdgText = 0;
     m_itemDmeText = 0;
 
-    m_heading    = 0.0f;
-    m_headingBug = 0.0f;
-    m_course     = 0.0f;
-    m_bearing    = 0.0f;
-    m_deviation  = 0.0f;
-    m_distance   = 0.0f;
+    m_heading    = 0.0;
+    m_headingBug = 0.0;
+    m_course     = 0.0;
+    m_bearing    = 0.0;
+    m_deviation  = 0.0;
+    m_distance   = 0.0;
 
     m_bearingVisible   = true;
     m_deviationVisible = true;
     m_distanceVisible  = true;
 
-    m_devBarDeltaX_new = 0.0f;
-    m_devBarDeltaX_old = 0.0f;
-    m_devBarDeltaY_new = 0.0f;
-    m_devBarDeltaY_old = 0.0f;
+    m_devBarDeltaX_new = 0.0;
+    m_devBarDeltaX_old = 0.0;
+    m_devBarDeltaY_new = 0.0;
+    m_devBarDeltaY_old = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void qfi_NAV::updateView()
 {
-    m_scaleX = (float)width()  / (float)m_originalWidth;
-    m_scaleY = (float)height() / (float)m_originalHeight;
+    m_scaleX = static_cast<double>(width())  / static_cast<double>(m_originalWidth);
+    m_scaleY = static_cast<double>(height()) / static_cast<double>(m_originalHeight);
 
     m_itemCrsArrow->setRotation( -m_heading + m_course );
     m_itemHdgBug->setRotation( -m_heading + m_headingBug );
@@ -441,21 +460,21 @@ void qfi_NAV::updateView()
         m_itemDevBar->setVisible( true );
         m_itemDevScale->setVisible( true );
 
-        float angle_deg = -m_heading + m_course;
+        double angle_deg = -m_heading + m_course;
 #       ifndef M_PI
-        float angle_rad = 3.14159265358979323846 * angle_deg / 180.0f;
+        double angle_rad = 3.14159265358979323846 * angle_deg / 180.0;
 #       else
-        float angle_rad = M_PI * angle_deg / 180.0f;
+        double angle_rad = M_PI * angle_deg / 180.0;
 #       endif
 
 
-        float sinAngle = sin( angle_rad );
-        float cosAngle = cos( angle_rad );
+        double sinAngle = sin( angle_rad );
+        double cosAngle = cos( angle_rad );
 
         m_itemDevBar->setRotation( angle_deg );
         m_itemDevScale->setRotation( angle_deg );
 
-        float delta  = m_originalPixPerDev * m_deviation;
+        double delta  = m_originalPixPerDev * m_deviation;
 
         m_devBarDeltaX_new = m_scaleX * delta * cosAngle;
         m_devBarDeltaY_new = m_scaleY * delta * sinAngle;
@@ -486,5 +505,5 @@ void qfi_NAV::updateView()
 
     m_scene->update();
 
-    centerOn( width() / 2.0f , height() / 2.0f );
+    centerOn( width() / 2.0 , height() / 2.0 );
 }

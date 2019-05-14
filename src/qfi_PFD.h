@@ -84,13 +84,13 @@ public:
     void update();
 
     /** @param roll angle [deg] */
-    inline void setRoll( float roll )
+    inline void setRoll( double roll )
     {
         m_adi->setRoll( roll );
     }
 
     /** @param pitch angle [deg] */
-    inline void setPitch( float pitch )
+    inline void setPitch( double pitch )
     {
         m_adi->setPitch( pitch );
     }
@@ -99,13 +99,13 @@ public:
      * @param angle of attack [deg]
      * @param angle of sideslip [deg]
      * @param flight path marker visibility */
-    inline void setFlightPathMarker( float aoa, float sideslip, bool visible = true )
+    inline void setFlightPathMarker( double aoa, double sideslip, bool visible = true )
     {
         m_adi->setFlightPathMarker( aoa, sideslip, visible );
     }
 
     /** @param normalized slip or skid (range from -1.0 to 1.0) */
-    inline void setSlipSkid( float slipSkid )
+    inline void setSlipSkid( double slipSkid )
     {
         m_adi->setSlipSkid( slipSkid );
     }
@@ -113,7 +113,7 @@ public:
     /**
      * @param normalized turn rate (range from -1.0 to 1.0),
      * hash marks positions are set to be -0.5 and 0.5 */
-    inline void setTurnRate( float turnRate )
+    inline void setTurnRate( double turnRate )
     {
         m_adi->setTurnRate( turnRate );
     }
@@ -121,7 +121,7 @@ public:
     /**
      * @param normalized horizontal deviation bar position (range from -1.0 to 1.0)
      * @param horizontal deviation bar visibility */
-    inline void setBarH( float barH, bool visible = true )
+    inline void setBarH( double barH, bool visible = true )
     {
         m_adi->setBarH( barH, visible );
     }
@@ -129,7 +129,7 @@ public:
     /**
      * @param normalized vertical deviation bar position (range from -1.0 to 1.0)
      * @param vertical deviation bar visibility */
-    inline void setBarV( float barV, bool visible = true )
+    inline void setBarV( double barV, bool visible = true )
     {
         m_adi->setBarV( barV, visible );
     }
@@ -137,7 +137,7 @@ public:
     /**
      * @param normalized horizontal deviation dot position (range from -1.0 to 1.0)
      * @param horizontal deviation dot visibility */
-    inline void setDotH( float dotH, bool visible = true )
+    inline void setDotH( double dotH, bool visible = true )
     {
         m_adi->setDotH( dotH, visible );
     }
@@ -145,47 +145,83 @@ public:
     /**
      * @param normalized vertical deviation dot position (range from -1.0 to 1.0)
      * @param vertical deviation dot visibility */
-    inline void setDotV( float dotV, bool visible = true )
+    inline void setDotV( double dotV, bool visible = true )
     {
         m_adi->setDotV( dotV, visible );
     }
 
     /** @param altitude (dimensionless numeric value) */
-    inline void setAltitude( float altitude )
+    inline void setAltitude( double altitude )
     {
         m_alt->setAltitude( altitude );
+    }
+
+    /** @param altitude (dimensionless numeric value) */
+    inline void setAltitudeBug( double altitudeBug )
+    {
+        m_alt->setAltitudeBug( altitudeBug );
+    }
+
+    /** @param altitude (dimensionless numeric value) */
+    inline void setAltitudeBugVisible( bool visible )
+    {
+        m_alt->setAltitudeBugVisible( visible );
     }
 
     /**
      * @param pressure (dimensionless numeric value)
      * @param pressure unit according to GraphicsPFD::PressureUnit */
-    inline void setPressure( float pressure, PressureUnit pressureUnit )
+    inline void setPressure( double pressure, PressureUnit pressureUnit )
     {
         m_alt->setPressure( pressure, pressureUnit );
     }
 
     /** @param airspeed (dimensionless numeric value) */
-    inline void setAirspeed( float airspeed )
+    inline void setAirspeed( double airspeed )
     {
         m_asi->setAirspeed( airspeed );
     }
 
+    /** @param airspeedBug (dimensionless numeric value) */
+    inline void setAirspeedBug( double airspeedBug )
+    {
+        m_asi->setAirspeedBug( airspeedBug );
+    }
+
+    /** @param visible (dimensionless numeric value) */
+    inline void setAirspeedBugVisible( bool visible )
+    {
+        m_asi->setAirspeedBugVisible( visible );
+    }
+
     /** @param Mach number */
-    inline void setMachNo( float machNo )
+    inline void setMachNo( double machNo )
     {
         m_asi->setMachNo( machNo );
     }
 
     /** @param heading [deg] */
-    inline void setHeading( float heading )
+    inline void setHeading( double heading )
     {
         m_hsi->setHeading( heading );
     }
 
     /** @param climb rate (dimensionless numeric value)  */
-    inline void setClimbRate( float climbRate )
+    inline void setClimbRate( double climbRate )
     {
         m_vsi->setClimbRate( climbRate );
+    }
+
+    /** @param climb rate bug (dimensionless numeric value)  */
+    inline void setClimbRateBug( double climbRateBug )
+    {
+        m_vsi->setClimbRateBug( climbRateBug );
+    }
+
+    /** @param visible (dimensionless numeric value)  */
+    inline void setClimbRateBugVisible( bool visible )
+    {
+        m_vsi->setClimbRateBugVisible( visible );
     }
 
     /** @param ident (4-letter text) */
@@ -195,7 +231,7 @@ public:
     }
 
     /** @param distance [nautical miles] */
-    inline void setDistance( float dist, bool visible = false )
+    inline void setDistance( double dist, bool visible = false )
     {
         m_ils->setDistance( dist, visible );
     }
@@ -211,17 +247,17 @@ private:
     public:
 
         ADI( QGraphicsScene *scene );
-        void init( float scaleX, float scaleY );
-        void update( float scaleX, float scaleY );
-        void setRoll( float roll );
-        void setPitch( float pitch );
-        void setFlightPathMarker( float aoa, float sideslip, bool visible = true );
-        void setSlipSkid( float slipSkid );
-        void setTurnRate( float turnRate );
-        void setBarH( float barH, bool visible = true );
-        void setBarV( float barV, bool visible = true );
-        void setDotH( float dotH, bool visible = true );
-        void setDotV( float dotV, bool visible = true );
+        void init( double scaleX, double scaleY );
+        void update( double scaleX, double scaleY );
+        void setRoll( double roll );
+        void setPitch( double pitch );
+        void setFlightPathMarker( double aoa, double sideslip, bool visible = true );
+        void setSlipSkid( double slipSkid );
+        void setTurnRate( double turnRate );
+        void setBarH( double barH, bool visible = true );
+        void setBarV( double barV, bool visible = true );
+        void setDotH( double dotH, bool visible = true );
+        void setDotV( double dotV, bool visible = true );
 
     private:
 
@@ -242,16 +278,16 @@ private:
         QGraphicsSvgItem *m_itemScaleH;
         QGraphicsSvgItem *m_itemScaleV;
 
-        float m_roll;
-        float m_pitch;
-        float m_angleOfAttack;
-        float m_sideslipAngle;
-        float m_slipSkid;
-        float m_turnRate;
-        float m_barH;
-        float m_barV;
-        float m_dotH;
-        float m_dotV;
+        double m_roll;
+        double m_pitch;
+        double m_angleOfAttack;
+        double m_sideslipAngle;
+        double m_slipSkid;
+        double m_turnRate;
+        double m_barH;
+        double m_barV;
+        double m_dotH;
+        double m_dotV;
 
         bool m_pathValid;
 
@@ -261,47 +297,47 @@ private:
         bool m_dotHVisible;
         bool m_dotVVisible;
 
-        float m_laddDeltaX_new;
-        float m_laddDeltaX_old;
-        float m_laddBackDeltaX_new;
-        float m_laddBackDeltaX_old;
-        float m_laddBackDeltaY_new;
-        float m_laddBackDeltaY_old;
-        float m_laddDeltaY_new;
-        float m_laddDeltaY_old;
-        float m_slipDeltaX_new;
-        float m_slipDeltaX_old;
-        float m_slipDeltaY_new;
-        float m_slipDeltaY_old;
-        float m_turnDeltaX_new;
-        float m_turnDeltaX_old;
-        float m_pathDeltaX_new;
-        float m_pathDeltaX_old;
-        float m_pathDeltaY_new;
-        float m_pathDeltaY_old;
-        float m_markDeltaX_new;
-        float m_markDeltaX_old;
-        float m_markDeltaY_new;
-        float m_markDeltaY_old;
-        float m_barHDeltaX_new;
-        float m_barHDeltaX_old;
-        float m_barVDeltaY_new;
-        float m_barVDeltaY_old;
-        float m_dotHDeltaX_new;
-        float m_dotHDeltaX_old;
-        float m_dotVDeltaY_new;
-        float m_dotVDeltaY_old;
+        double m_laddDeltaX_new;
+        double m_laddDeltaX_old;
+        double m_laddBackDeltaX_new;
+        double m_laddBackDeltaX_old;
+        double m_laddBackDeltaY_new;
+        double m_laddBackDeltaY_old;
+        double m_laddDeltaY_new;
+        double m_laddDeltaY_old;
+        double m_slipDeltaX_new;
+        double m_slipDeltaX_old;
+        double m_slipDeltaY_new;
+        double m_slipDeltaY_old;
+        double m_turnDeltaX_new;
+        double m_turnDeltaX_old;
+        double m_pathDeltaX_new;
+        double m_pathDeltaX_old;
+        double m_pathDeltaY_new;
+        double m_pathDeltaY_old;
+        double m_markDeltaX_new;
+        double m_markDeltaX_old;
+        double m_markDeltaY_new;
+        double m_markDeltaY_old;
+        double m_barHDeltaX_new;
+        double m_barHDeltaX_old;
+        double m_barVDeltaY_new;
+        double m_barVDeltaY_old;
+        double m_dotHDeltaX_new;
+        double m_dotHDeltaX_old;
+        double m_dotVDeltaY_new;
+        double m_dotVDeltaY_old;
 
-        float m_scaleX;
-        float m_scaleY;
+        double m_scaleX;
+        double m_scaleY;
 
-        const float m_originalPixPerDeg;
-        const float m_deltaLaddBack_max;
-        const float m_deltaLaddBack_min;
-        const float m_maxSlipDeflection;
-        const float m_maxTurnDeflection;
-        const float m_maxBarsDeflection;
-        const float m_maxDotsDeflection;
+        const double m_originalPixPerDeg;
+        const double m_deltaLaddBack_max;
+        const double m_deltaLaddBack_min;
+        const double m_maxSlipDeflection;
+        const double m_maxTurnDeflection;
+        const double m_maxBarsDeflection;
+        const double m_maxDotsDeflection;
 
         QPointF m_originalAdiCtr;
         QPointF m_originalBackPos;
@@ -329,10 +365,10 @@ private:
         const int m_turnZ;
 
         void reset();
-        void updateLadd( float delta, float sinRoll, float cosRoll );
-        void updateLaddBack( float delta, float sinRoll, float cosRoll );
+        void updateLadd( double delta, double sinRoll, double cosRoll );
+        void updateLaddBack( double delta, double sinRoll, double cosRoll );
         void updateRoll();
-        void updateSlipSkid( float sinRoll, float cosRoll );
+        void updateSlipSkid( double sinRoll, double cosRoll );
         void updateTurnRate();
         void updateFlightPath();
         void updateBars();
@@ -344,10 +380,12 @@ private:
     public:
 
         ALT( QGraphicsScene *scene );
-        void init( float scaleX, float scaleY );
-        void update( float scaleX, float scaleY );
-        void setAltitude( float altitude );
-        void setPressure( float pressure, int pressureUnit );
+        void init( double scaleX, double scaleY );
+        void update( double scaleX, double scaleY );
+        void setAltitude( double altitude );
+        void setAltitudeBug( double altitudeBug );
+        void setAltitudeBugVisible( bool visible );
+        void setPressure( double pressure, int pressureUnit );
 
     private:
 
@@ -362,6 +400,7 @@ private:
         QGraphicsSvgItem  *m_itemGround;
         QGraphicsSvgItem  *m_itemFrame;
         QGraphicsTextItem *m_itemAltitude;
+        QGraphicsSvgItem  *m_itemAltitudeBug;
         QGraphicsTextItem *m_itemPressure;
 
         QColor m_frameTextColor;
@@ -371,29 +410,30 @@ private:
         QFont  m_frameTextFont;
         QFont  m_labelsFont;
 
-        float m_altitude;
-        float m_pressure;
+        double m_altitude;
+        double m_altitudeBug;
+        double m_pressure;
 
         int m_pressureUnit;
 
-        float m_scale1DeltaY_new;
-        float m_scale1DeltaY_old;
-        float m_scale2DeltaY_new;
-        float m_scale2DeltaY_old;
-        float m_groundDeltaY_new;
-        float m_groundDeltaY_old;
-        float m_labelsDeltaY_new;
-        float m_labelsDeltaY_old;
+        double m_scale1DeltaY_new;
+        double m_scale1DeltaY_old;
+        double m_scale2DeltaY_new;
+        double m_scale2DeltaY_old;
+        double m_groundDeltaY_new;
+        double m_groundDeltaY_old;
+        double m_labelsDeltaY_new;
+        double m_labelsDeltaY_old;
 
-        float m_scaleX;
-        float m_scaleY;
+        double m_scaleX;
+        double m_scaleY;
 
-        const float m_originalPixPerAlt;
-        const float m_originalScaleHeight;
-        const float m_originalLabelsX;
-        const float m_originalLabel1Y;
-        const float m_originalLabel2Y;
-        const float m_originalLabel3Y;
+        const double m_originalPixPerAlt;
+        const double m_originalScaleHeight;
+        const double m_originalLabelsX;
+        const double m_originalLabel1Y;
+        const double m_originalLabel2Y;
+        const double m_originalLabel3Y;
 
         QPointF m_originalBackPos;
         QPointF m_originalScale1Pos;
@@ -401,6 +441,7 @@ private:
         QPointF m_originalGroundPos;
         QPointF m_originalFramePos;
         QPointF m_originalAltitudeCtr;
+        QPointF m_originalAltitudeBugPos;
         QPointF m_originalPressureCtr;
 
         const int m_backZ;
@@ -409,6 +450,7 @@ private:
         const int m_groundZ;
         const int m_frameZ;
         const int m_frameTextZ;
+        const int m_bugZ;
 
         void reset();
         void updateAltitude();
@@ -422,10 +464,12 @@ private:
     public:
 
         ASI( QGraphicsScene *scene );
-        void init( float scaleX, float scaleY );
-        void update( float scaleX, float scaleY );
-        void setAirspeed( float airspeed );
-        void setMachNo( float machNo );
+        void init( double scaleX, double scaleY );
+        void update( double scaleX, double scaleY );
+        void setAirspeed( double airspeed );
+        void setAirspeedBug( double airspeedBug );
+        void setAirspeedBugVisible( bool visible );
+        void setMachNo( double machNo );
 
     private:
 
@@ -444,6 +488,7 @@ private:
         QGraphicsSvgItem  *m_itemFrame;
         QGraphicsTextItem *m_itemAirspeed;
         QGraphicsTextItem *m_itemMachNo;
+        QGraphicsSvgItem *m_itemBug;
 
         QColor m_frameTextColor;
         QColor m_labelsColor;
@@ -451,34 +496,36 @@ private:
         QFont  m_frameTextFont;
         QFont  m_labelsFont;
 
-        float m_airspeed;
-        float m_machNo;
+        double m_airspeed;
+        double m_airspeedBug;
+        double m_machNo;
 
-        float m_scale1DeltaY_new;
-        float m_scale1DeltaY_old;
-        float m_scale2DeltaY_new;
-        float m_scale2DeltaY_old;
-        float m_labelsDeltaY_new;
-        float m_labelsDeltaY_old;
+        double m_scale1DeltaY_new;
+        double m_scale1DeltaY_old;
+        double m_scale2DeltaY_new;
+        double m_scale2DeltaY_old;
+        double m_labelsDeltaY_new;
+        double m_labelsDeltaY_old;
 
-        float m_scaleX;
-        float m_scaleY;
+        double m_scaleX;
+        double m_scaleY;
 
-        const float m_originalPixPerSpd;
-        const float m_originalScaleHeight;
-        const float m_originalLabelsX;
-        const float m_originalLabel1Y;
-        const float m_originalLabel2Y;
-        const float m_originalLabel3Y;
-        const float m_originalLabel4Y;
-        const float m_originalLabel5Y;
-        const float m_originalLabel6Y;
-        const float m_originalLabel7Y;
+        const double m_originalPixPerSpd;
+        const double m_originalScaleHeight;
+        const double m_originalLabelsX;
+        const double m_originalLabel1Y;
+        const double m_originalLabel2Y;
+        const double m_originalLabel3Y;
+        const double m_originalLabel4Y;
+        const double m_originalLabel5Y;
+        const double m_originalLabel6Y;
+        const double m_originalLabel7Y;
 
         QPointF m_originalBackPos;
         QPointF m_originalScale1Pos;
         QPointF m_originalScale2Pos;
         QPointF m_originalFramePos;
+        QPointF m_originalBugPos;
         QPointF m_originalAirspeedCtr;
         QPointF m_originalMachNoCtr;
 
@@ -486,6 +533,7 @@ private:
         const int m_scaleZ;
         const int m_labelsZ;
         const int m_frameZ;
+        const int m_bugZ;
         const int m_frameTextZ;
 
         void reset();
@@ -499,9 +547,9 @@ private:
     public:
 
         HSI( QGraphicsScene *scene );
-        void init( float scaleX, float scaleY );
-        void update( float scaleX, float scaleY );
-        void setHeading( float heading );
+        void init( double scaleX, double scaleY );
+        void update( double scaleX, double scaleY );
+        void setHeading( double heading );
 
     private:
 
@@ -516,10 +564,10 @@ private:
 
         QFont  m_frameTextFont;
 
-        float m_heading;
+        double m_heading;
 
-        float m_scaleX;
-        float m_scaleY;
+        double m_scaleX;
+        double m_scaleY;
 
         QPointF m_originalHsiCtr;
         QPointF m_originalBackPos;
@@ -541,9 +589,11 @@ private:
     public:
 
         VSI( QGraphicsScene *scene );
-        void init( float scaleX, float scaleY );
-        void update( float scaleX, float scaleY );
-        void setClimbRate( float climbRate );
+        void init( double scaleX, double scaleY );
+        void update( double scaleX, double scaleY );
+        void setClimbRate( double climbRate );
+        void setClimbRateBug( double climbRateBug );
+        void setClimbRateBugVisible( bool visible );
 
     private:
 
@@ -551,25 +601,31 @@ private:
 
         QGraphicsSvgItem  *m_itemScale;
         QGraphicsSvgItem  *m_itemArrow;
+        QGraphicsSvgItem  *m_itemArrowBug;
 
-        float m_climbRate;
+        double m_climbRate;
+        double m_climbRateBug;
 
-        float m_arrowDeltaY_new;
-        float m_arrowDeltaY_old;
+        double m_arrowDeltaY_new;
+        double m_arrowDeltaY_old;
+        double m_arrowBugDeltaY_new;
+        double m_arrowBugDeltaY_old;
 
-        float m_scaleX;
-        float m_scaleY;
+        double m_scaleX;
+        double m_scaleY;
 
-        const float m_originalMarkeHeight;
-        const float m_originalPixPerSpd1;
-        const float m_originalPixPerSpd2;
-        const float m_originalPixPerSpd4;
+        const double m_originalMarkeHeight;
+        const double m_originalPixPerSpd1;
+        const double m_originalPixPerSpd2;
+        const double m_originalPixPerSpd4;
 
         QPointF m_originalScalePos;
         QPointF m_originalArrowPos;
+        QPointF m_originalBugPos;
 
         const int m_scaleZ;
         const int m_arrowZ;
+        const int m_bugZ;
 
         void reset();
         void updateVSI();
@@ -580,10 +636,10 @@ private:
     public:
 
         ILS( QGraphicsScene *scene );
-        void init( float scaleX, float scaleY );
-        void update( float scaleX, float scaleY );
+        void init( double scaleX, double scaleY );
+        void update( double scaleX, double scaleY );
         void setIdentifier( const QString &ident, bool visible );
-        void setDistance( float dist, bool visible );
+        void setDistance( double dist, bool visible );
 
     private:
 
@@ -592,14 +648,14 @@ private:
         QGraphicsTextItem *m_itemIdentText;
         QGraphicsTextItem *m_itemDistText;
 
-        float m_distance;
+        double m_distance;
         QString m_identifier;
 
         bool m_Dist_Visible;
         bool m_Ident_Visible;
 
-        float m_scaleX;
-        float m_scaleY;
+        double m_scaleX;
+        double m_scaleY;
 
         QPointF m_originalIdentPos;
         QPointF m_originalDistPos;
@@ -627,8 +683,8 @@ private:
     QGraphicsSvgItem *m_itemBack;
     QGraphicsSvgItem *m_itemMask;
 
-    float m_scaleX;
-    float m_scaleY;
+    double m_scaleX;
+    double m_scaleY;
 
     const int m_originalHeight;
     const int m_originalWidth;
