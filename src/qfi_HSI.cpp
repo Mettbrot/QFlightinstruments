@@ -60,10 +60,10 @@
 qfi_HSI::qfi_HSI( QWidget *parent ) :
     QGraphicsView ( parent ),
 
-    m_scene ( 0 ),
+    m_scene ( nullptr ),
 
-    m_itemFace ( 0 ),
-    m_itemCase ( 0 ),
+    m_itemFace ( nullptr ),
+    m_itemCase ( nullptr ),
 
     m_heading ( 0.0 ),
 
@@ -92,11 +92,11 @@ qfi_HSI::qfi_HSI( QWidget *parent ) :
 
 qfi_HSI::~qfi_HSI()
 {
-    if ( m_scene )
+    if ( m_scene != nullptr )
     {
         m_scene->clear();
         delete m_scene;
-        m_scene = 0;
+        m_scene = nullptr;
     }
 
     reset();
@@ -170,8 +170,8 @@ void qfi_HSI::init()
 
 void qfi_HSI::reset()
 {
-    m_itemFace = 0;
-    m_itemCase = 0;
+    m_itemFace = nullptr;
+    m_itemCase = nullptr;
 
     m_heading = 0.0;
 }

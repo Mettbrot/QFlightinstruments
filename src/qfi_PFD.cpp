@@ -68,17 +68,17 @@
 qfi_PFD::qfi_PFD( QWidget * parent ) :
     QGraphicsView ( parent ),
 
-    m_scene ( 0 ),
+    m_scene ( nullptr ),
 
-    m_adi ( 0 ),
-    m_alt ( 0 ),
-    m_asi ( 0 ),
-    m_hsi ( 0 ),
-    m_vsi ( 0 ),
-    m_ils ( 0 ),
+    m_adi ( nullptr ),
+    m_alt ( nullptr ),
+    m_asi ( nullptr ),
+    m_hsi ( nullptr ),
+    m_vsi ( nullptr ),
+    m_ils ( nullptr ),
 
-    m_itemBack ( 0 ),
-    m_itemMask ( 0 ),
+    m_itemBack ( nullptr ),
+    m_itemMask ( nullptr ),
 
     m_scaleX ( 1.0 ),
     m_scaleY ( 1.0 ),
@@ -110,21 +110,45 @@ qfi_PFD::qfi_PFD( QWidget * parent ) :
 
 qfi_PFD::~qfi_PFD()
 {
-    if ( m_scene )
+    if ( m_scene != nullptr )
     {
         m_scene->clear();
         delete m_scene;
-        m_scene = 0;
+        m_scene = nullptr;
     }
 
     reset();
 
-    if ( m_adi ) delete m_adi; m_adi = 0;
-    if ( m_alt ) delete m_alt; m_alt = 0;
-    if ( m_asi ) delete m_asi; m_asi = 0;
-    if ( m_hsi ) delete m_hsi; m_hsi = 0;
-    if ( m_vsi ) delete m_vsi; m_vsi = 0;
-    if ( m_ils ) delete m_ils; m_ils = 0;
+    if ( m_adi != nullptr )
+    {
+        delete m_adi;
+        m_adi = nullptr;
+    }
+    if ( m_alt != nullptr )
+    {
+        delete m_alt;
+        m_alt = nullptr;
+    }
+    if ( m_asi != nullptr )
+    {
+        delete m_asi;
+        m_asi = nullptr;
+    }
+    if ( m_hsi != nullptr )
+    {
+        delete m_hsi;
+        m_hsi = nullptr;
+    }
+    if ( m_vsi != nullptr )
+    {
+        delete m_vsi;
+        m_vsi = nullptr;
+    }
+    if ( m_ils != nullptr )
+    {
+        delete m_ils;
+        m_ils = nullptr;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -220,20 +244,20 @@ void qfi_PFD::updateView()
 qfi_PFD::ADI::ADI( QGraphicsScene * scene ) :
     m_scene ( scene ),
 
-    m_itemBack   ( 0 ),
-    m_itemLadd   ( 0 ),
-    m_itemRoll   ( 0 ),
-    m_itemSlip   ( 0 ),
-    m_itemTurn   ( 0 ),
-    m_itemPath   ( 0 ),
-    m_itemMark   ( 0 ),
-    m_itemBarH   ( 0 ),
-    m_itemBarV   ( 0 ),
-    m_itemDotH   ( 0 ),
-    m_itemDotV   ( 0 ),
-    m_itemMask   ( 0 ),
-    m_itemScaleH ( 0 ),
-    m_itemScaleV ( 0 ),
+    m_itemBack   ( nullptr ),
+    m_itemLadd   ( nullptr ),
+    m_itemRoll   ( nullptr ),
+    m_itemSlip   ( nullptr ),
+    m_itemTurn   ( nullptr ),
+    m_itemPath   ( nullptr ),
+    m_itemMark   ( nullptr ),
+    m_itemBarH   ( nullptr ),
+    m_itemBarV   ( nullptr ),
+    m_itemDotH   ( nullptr ),
+    m_itemDotV   ( nullptr ),
+    m_itemMask   ( nullptr ),
+    m_itemScaleH ( nullptr ),
+    m_itemScaleV ( nullptr ),
 
     m_roll          ( 0.0 ),
     m_pitch         ( 0.0 ),
@@ -603,20 +627,20 @@ void qfi_PFD::ADI::setDotV( double dotV, bool visible )
 
 void qfi_PFD::ADI::reset()
 {
-    m_itemBack   = 0;
-    m_itemLadd   = 0;
-    m_itemRoll   = 0;
-    m_itemSlip   = 0;
-    m_itemTurn   = 0;
-    m_itemPath   = 0;
-    m_itemMark   = 0;
-    m_itemBarH   = 0;
-    m_itemBarV   = 0;
-    m_itemDotH   = 0;
-    m_itemDotV   = 0;
-    m_itemMask   = 0;
-    m_itemScaleH = 0;
-    m_itemScaleV = 0;
+    m_itemBack   = nullptr;
+    m_itemLadd   = nullptr;
+    m_itemRoll   = nullptr;
+    m_itemSlip   = nullptr;
+    m_itemTurn   = nullptr;
+    m_itemPath   = nullptr;
+    m_itemMark   = nullptr;
+    m_itemBarH   = nullptr;
+    m_itemBarV   = nullptr;
+    m_itemDotH   = nullptr;
+    m_itemDotV   = nullptr;
+    m_itemMask   = nullptr;
+    m_itemScaleH = nullptr;
+    m_itemScaleV = nullptr;
 
     m_roll          = 0.0;
     m_pitch         = 0.0;
@@ -858,17 +882,17 @@ void qfi_PFD::ADI::updateDots()
 qfi_PFD::ALT::ALT( QGraphicsScene * scene ) :
     m_scene ( scene ),
 
-    m_itemBack     ( 0 ),
-    m_itemScale1   ( 0 ),
-    m_itemScale2   ( 0 ),
-    m_itemLabel1   ( 0 ),
-    m_itemLabel2   ( 0 ),
-    m_itemLabel3   ( 0 ),
-    m_itemGround   ( 0 ),
-    m_itemFrame    ( 0 ),
-    m_itemAltitude ( 0 ),
-    m_itemAltitudeBug ( 0 ),
-    m_itemPressure ( 0 ),
+    m_itemBack     ( nullptr ),
+    m_itemScale1   ( nullptr ),
+    m_itemScale2   ( nullptr ),
+    m_itemLabel1   ( nullptr ),
+    m_itemLabel2   ( nullptr ),
+    m_itemLabel3   ( nullptr ),
+    m_itemGround   ( nullptr ),
+    m_itemFrame    ( nullptr ),
+    m_itemAltitude ( nullptr ),
+    m_itemAltitudeBug ( nullptr ),
+    m_itemPressure ( nullptr ),
 
     m_frameTextColor ( 255, 255, 255 ),
     m_pressTextColor (   0, 255,   0 ),
@@ -1109,16 +1133,16 @@ void qfi_PFD::ALT::setPressure( double pressure, int pressureUnit )
 
 void qfi_PFD::ALT::reset()
 {
-    m_itemBack     = 0;
-    m_itemScale1   = 0;
-    m_itemScale2   = 0;
-    m_itemLabel1   = 0;
-    m_itemLabel2   = 0;
-    m_itemLabel3   = 0;
-    m_itemGround   = 0;
-    m_itemFrame    = 0;
-    m_itemAltitude = 0;
-    m_itemPressure = 0;
+    m_itemBack     = nullptr;
+    m_itemScale1   = nullptr;
+    m_itemScale2   = nullptr;
+    m_itemLabel1   = nullptr;
+    m_itemLabel2   = nullptr;
+    m_itemLabel3   = nullptr;
+    m_itemGround   = nullptr;
+    m_itemFrame    = nullptr;
+    m_itemAltitude = nullptr;
+    m_itemPressure = nullptr;
 
     m_altitude = 0.0;
     m_altitudeBug = 0.0;
@@ -1271,19 +1295,19 @@ void qfi_PFD::ALT::updateScaleLabels()
 qfi_PFD::ASI::ASI( QGraphicsScene * scene ) :
     m_scene ( scene ),
 
-    m_itemBack     ( 0 ),
-    m_itemScale1   ( 0 ),
-    m_itemScale2   ( 0 ),
-    m_itemLabel1   ( 0 ),
-    m_itemLabel2   ( 0 ),
-    m_itemLabel3   ( 0 ),
-    m_itemLabel4   ( 0 ),
-    m_itemLabel5   ( 0 ),
-    m_itemLabel6   ( 0 ),
-    m_itemLabel7   ( 0 ),
-    m_itemFrame    ( 0 ),
-    m_itemAirspeed ( 0 ),
-    m_itemMachNo   ( 0 ),
+    m_itemBack     ( nullptr ),
+    m_itemScale1   ( nullptr ),
+    m_itemScale2   ( nullptr ),
+    m_itemLabel1   ( nullptr ),
+    m_itemLabel2   ( nullptr ),
+    m_itemLabel3   ( nullptr ),
+    m_itemLabel4   ( nullptr ),
+    m_itemLabel5   ( nullptr ),
+    m_itemLabel6   ( nullptr ),
+    m_itemLabel7   ( nullptr ),
+    m_itemFrame    ( nullptr ),
+    m_itemAirspeed ( nullptr ),
+    m_itemMachNo   ( nullptr ),
 
     m_frameTextColor ( 255, 255, 255 ),
     m_labelsColor    ( 255, 255, 255 ),
@@ -1547,20 +1571,20 @@ void qfi_PFD::ASI::setMachNo( double machNo )
 
 void qfi_PFD::ASI::reset()
 {
-    m_itemBack     = 0;
-    m_itemScale1   = 0;
-    m_itemScale2   = 0;
-    m_itemLabel1   = 0;
-    m_itemLabel2   = 0;
-    m_itemLabel3   = 0;
-    m_itemLabel4   = 0;
-    m_itemLabel5   = 0;
-    m_itemLabel6   = 0;
-    m_itemLabel7   = 0;
-    m_itemFrame    = 0;
-    m_itemAirspeed = 0;
-    m_itemMachNo   = 0;
-    m_itemBug      = 0;
+    m_itemBack     = nullptr;
+    m_itemScale1   = nullptr;
+    m_itemScale2   = nullptr;
+    m_itemLabel1   = nullptr;
+    m_itemLabel2   = nullptr;
+    m_itemLabel3   = nullptr;
+    m_itemLabel4   = nullptr;
+    m_itemLabel5   = nullptr;
+    m_itemLabel6   = nullptr;
+    m_itemLabel7   = nullptr;
+    m_itemFrame    = nullptr;
+    m_itemAirspeed = nullptr;
+    m_itemMachNo   = nullptr;
+    m_itemBug      = nullptr;
 
     m_airspeed    = 0.0;
     m_airspeedBug = 0.0;
@@ -1758,10 +1782,10 @@ void qfi_PFD::ASI::updateScaleLabels()
 qfi_PFD::HSI::HSI( QGraphicsScene * scene ) :
     m_scene ( scene ),
 
-    m_itemBack      ( 0 ),
-    m_itemFace      ( 0 ),
-    m_itemMarks     ( 0 ),
-    m_itemFrameText ( 0 ),
+    m_itemBack      ( nullptr ),
+    m_itemFace      ( nullptr ),
+    m_itemMarks     ( nullptr ),
+    m_itemFrameText ( nullptr ),
 
     m_frameTextColor ( 255, 255, 255 ),
 
@@ -1865,10 +1889,10 @@ void qfi_PFD::HSI::setHeading( double heading )
 
 void qfi_PFD::HSI::reset()
 {
-    m_itemBack      = 0;
-    m_itemFace      = 0;
-    m_itemMarks     = 0;
-    m_itemFrameText = 0;
+    m_itemBack      = nullptr;
+    m_itemFace      = nullptr;
+    m_itemMarks     = nullptr;
+    m_itemFrameText = nullptr;
 
     m_heading  = 0.0;
 }
@@ -1891,8 +1915,8 @@ void qfi_PFD::HSI::updateHeading()
 qfi_PFD::VSI::VSI( QGraphicsScene * scene ) :
     m_scene ( scene ),
 
-    m_itemScale ( 0 ),
-    m_itemArrow ( 0 ),
+    m_itemScale ( nullptr ),
+    m_itemArrow ( nullptr ),
 
     m_climbRate ( 0.0 ),
 
@@ -1996,9 +2020,9 @@ void qfi_PFD::VSI::setClimbRateBugVisible( bool visible )
 
 void qfi_PFD::VSI::reset()
 {
-    m_itemScale = 0;
-    m_itemArrow = 0;
-    m_itemArrowBug = 0;
+    m_itemScale = nullptr;
+    m_itemArrow = nullptr;
+    m_itemArrowBug = nullptr;
 
     m_climbRate = 0.0;
 
@@ -2064,8 +2088,8 @@ void qfi_PFD::VSI::updateVSI()
 qfi_PFD::ILS::ILS( QGraphicsScene *scene ) :
     m_scene ( scene ),
 
-    m_itemIdentText ( 0 ),
-    m_itemDistText  ( 0 ),
+    m_itemIdentText ( nullptr ),
+    m_itemDistText  ( nullptr ),
 
     m_distance ( 0.0 ),
     m_identifier ( "" ),
@@ -2101,8 +2125,8 @@ qfi_PFD::ILS::ILS( QGraphicsScene *scene ) :
 
 void qfi_PFD::ILS::reset()
 {
-    m_itemIdentText = 0;
-    m_itemDistText  = 0;
+    m_itemIdentText = nullptr;
+    m_itemDistText  = nullptr;
 
     m_distance   = 0.0;
     m_identifier =  "";

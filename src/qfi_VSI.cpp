@@ -60,11 +60,11 @@
 qfi_VSI::qfi_VSI( QWidget *parent ) :
     QGraphicsView ( parent ),
 
-    m_scene ( 0 ),
+    m_scene ( nullptr ),
 
-    m_itemFace ( 0 ),
-    m_itemHand ( 0 ),
-    m_itemCase ( 0 ),
+    m_itemFace ( nullptr ),
+    m_itemHand ( nullptr ),
+    m_itemCase ( nullptr ),
 
     m_climbRate ( 0.0 ),
 
@@ -94,11 +94,11 @@ qfi_VSI::qfi_VSI( QWidget *parent ) :
 
 qfi_VSI::~qfi_VSI()
 {
-    if ( m_scene )
+    if ( m_scene != nullptr )
     {
         m_scene->clear();
         delete m_scene;
-        m_scene = 0;
+        m_scene = nullptr;
     }
 
     reset();
@@ -181,9 +181,9 @@ void qfi_VSI::init()
 
 void qfi_VSI::reset()
 {
-    m_itemFace = 0;
-    m_itemHand = 0;
-    m_itemCase = 0;
+    m_itemFace = nullptr;
+    m_itemHand = nullptr;
+    m_itemCase = nullptr;
 
     m_climbRate = 0.0;
 }

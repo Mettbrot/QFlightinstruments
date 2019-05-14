@@ -60,14 +60,14 @@
 qfi_ALT::qfi_ALT( QWidget *parent ) :
     QGraphicsView ( parent ),
 
-    m_scene ( 0 ),
+    m_scene ( nullptr ),
 
-    m_itemFace_1 ( 0 ),
-    m_itemFace_2 ( 0 ),
-    m_itemFace_3 ( 0 ),
-    m_itemHand_1 ( 0 ),
-    m_itemHand_2 ( 0 ),
-    m_itemCase   ( 0 ),
+    m_itemFace_1 ( nullptr ),
+    m_itemFace_2 ( nullptr ),
+    m_itemFace_3 ( nullptr ),
+    m_itemHand_1 ( nullptr ),
+    m_itemHand_2 ( nullptr ),
+    m_itemCase   ( nullptr ),
 
     m_altitude (  0.0 ),
     m_pressure ( 28.0 ),
@@ -101,11 +101,11 @@ qfi_ALT::qfi_ALT( QWidget *parent ) :
 
 qfi_ALT::~qfi_ALT()
 {
-    if ( m_scene )
+    if ( m_scene != nullptr )
     {
         m_scene->clear();
         delete m_scene;
-        m_scene = 0;
+        m_scene = nullptr;
     }
 
     reset();
@@ -216,12 +216,12 @@ void qfi_ALT::init()
 
 void qfi_ALT::reset()
 {
-    m_itemFace_1 = 0;
-    m_itemFace_2 = 0;
-    m_itemFace_3 = 0;
-    m_itemHand_1 = 0;
-    m_itemHand_2 = 0;
-    m_itemCase   = 0;
+    m_itemFace_1 = nullptr;
+    m_itemFace_2 = nullptr;
+    m_itemFace_3 = nullptr;
+    m_itemHand_1 = nullptr;
+    m_itemHand_2 = nullptr;
+    m_itemCase   = nullptr;
 
     m_altitude =  0.0;
     m_pressure = 28.0;
