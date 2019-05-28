@@ -68,7 +68,8 @@ public:
     {
         STD = 0,    ///< standard (displays STD instead of numerical value)
         MB,         ///< milibars
-        IN          ///< inches of mercury
+        IN,          ///< inches of mercury
+        NONE          ///< display the value only
     };
 
     /** Constructor. */

@@ -1127,6 +1127,7 @@ void qfi_PFD::ALT::setPressure( double pressure, int pressureUnit )
 
     if      ( pressureUnit == 1 ) m_pressureUnit = 1;
     else if ( pressureUnit == 2 ) m_pressureUnit = 2;
+    else if ( pressureUnit == 3 ) m_pressureUnit = 3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1185,6 +1186,10 @@ void qfi_PFD::ALT::updatePressure()
     else if ( m_pressureUnit == 2 )
     {
         m_itemPressure->setPlainText( QString::number( m_pressure, 'f', 2 ) + QString( " IN" ) );
+    }
+    else if ( m_pressureUnit == 3 )
+    {
+        m_itemPressure->setPlainText( QString::number( m_pressure, 'f', 2 ) );
     }
 }
 
