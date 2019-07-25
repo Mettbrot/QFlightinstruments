@@ -90,6 +90,7 @@ qfi_PFD::qfi_PFD( QWidget * parent ) :
     m_maskZ ( 100 )
 {
     reset();
+    this->setFocusPolicy( Qt::NoFocus );
 
     m_scene = new QGraphicsScene( this );
     setScene( m_scene );
